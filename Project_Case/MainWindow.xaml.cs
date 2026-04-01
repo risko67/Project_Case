@@ -19,6 +19,7 @@ namespace Project_Case
         public MainWindow()
         {
             InitializeComponent();
+       
         }
     }
 }
