@@ -1,24 +1,37 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
-namespace Project_Case
+namespace CS2_CaseOpening
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Registration is currently unavailable. Please contact support.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        
+        
+        
+        
+        ,private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            string user = txtUsername.Text;
+            string pass = txtPassword.Password;
+
+            if (user == "admin" && pass == "cs2best")
+            {
+                MessageBox.Show("Login successful! Opening inventory...", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+               
+            }
+            else
+            {
+                lblError.Text = "Invalid username or password!";
+                txtPassword.Clear();
+            }
         }
     }
 }
