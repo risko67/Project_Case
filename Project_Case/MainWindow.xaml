@@ -11,32 +11,64 @@
 
             <TextBlock Text="Username" Foreground="Gray" Margin="0,0,0,5"/>
             <TextBox x:Name="txtUsername" Height="35" Background="#1e1e1e" Foreground="White" 
-                     BorderBrush="#333" Padding="5" VerticalContentAlignment="Center"/>
-
-            <TextBlock Text="Password" Foreground="Gray" Margin="0,15,0,5"/>
-            <PasswordBox x:Name="txtPassword" Height="35" Background="#1e1e1e" Foreground="White" 
-                         BorderBrush="#333" Padding="5" VerticalContentAlignment="Center"/>
-
-            <Button x:Name="btnLogin" Content="LOGIN" Margin="0,30,0,0" Height="40" 
-                    Background="#FFD700" FontWeight="Bold" Cursor="Hand"
-                    Click="btnLogin_Click">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="5"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-
-            <TextBlock x:Name="lblError" Foreground="Red" HorizontalAlignment="Center" Margin="0,10,0,10" MinHeight="20"/>
-
-            <Button x:Name="btnRegister" Content="REGISTER" Height="40" 
-                    Background="#4CAF50" Foreground="White" FontWeight="Bold" Cursor="Hand"
-                    Click="btnRegister_Click">
-                <Button.Resources>
+                     BorderBrush="#333" Padding="8,5" VerticalContentAlignment="Center">
+                <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="5"/>
                     </Style>
-                </Button.Resources>
+                </TextBox.Resources>
+            </TextBox>
+
+            <TextBlock Text="Password" Foreground="Gray" Margin="0,15,0,5"/>
+            <PasswordBox x:Name="txtPassword" Height="35" Background="#1e1e1e" Foreground="White" 
+                         BorderBrush="#333" Padding="8,5" VerticalContentAlignment="Center"
+                         KeyDown="txtPassword_KeyDown">
+                <PasswordBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </PasswordBox.Resources>
+            </PasswordBox>
+
+            <TextBlock x:Name="lblError" Foreground="#FF4C4C" HorizontalAlignment="Center" 
+                       Margin="0,15,0,5" MinHeight="20" FontWeight="SemiBold" TextWrapping="Wrap"/>
+
+            <Button x:Name="btnLogin" Content="LOGIN" Margin="0,10,0,0" Height="45" 
+                    Background="#FFD700" Foreground="#000" FontWeight="Bold" Cursor="Hand"
+                    Click="btnLogin_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button x:Name="btnRegister" Content="REGISTER" Margin="0,10,0,0" Height="45" 
+                    Background="#4CAF50" Foreground="White" FontWeight="Bold" Cursor="Hand"
+                    Click="btnRegister_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
             </Button>
 
         </StackPanel>

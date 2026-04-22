@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
 
 namespace CS2_CaseOpening
 {
     public partial class MainWindow : Window
     {
-        
         private Dictionary<string, string> users = new Dictionary<string, string>()
         {
-            { "admin", "cs2best" } 
+            { "admin", "cs2best" }
         };
 
         public MainWindow()
         {
             InitializeComponent();
+            txtUsername.Focus();
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
@@ -29,41 +30,45 @@ namespace CS2_CaseOpening
 
             if (users.ContainsKey(user))
             {
-                lblError.Text = "Používateľ už existuje!";
+                lblError.Text = "Tento používateľ už existuje!";
             }
             else
             {
-                
                 users.Add(user, pass);
                 lblError.Text = "";
-                MessageBox.Show("Registrácia úspešná! Teraz sa môžeš prihlásiť.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                
-                txtPassword.Clear();
+                MessageBox.Show("Registrácia úspešná!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            HandleLogin();
+        }
+
+        private void HandleLogin()
+        {
             string user = txtUsername.Text.Trim();
             string pass = txtPassword.Password;
 
-            
-            if (users.ContainsKey(user) && users[user] == pass)
+            if (users.TryGetValue(user, out string storedPass) && storedPass == pass)
             {
-                lblError.Text = "";
-                MessageBox.Show($"Vitaj, {user}! Otváram inventár...", "Úspech", MessageBoxButton.OK, MessageBoxImage.Information);
+                // 1. Vytvoríme MENU, nie inventár
+                MenuWindow menuWin = new MenuWindow();
 
-               
-                InventoryWindow invWin = new InventoryWindow();
-                invWin.Show(); 
-                this.Close();  
+                // 2. Zobrazíme menu
+                menuWin.Show();
+
+                // 3. Zatvoríme prihlasovacie okno
+                this.Close();
             }
             else
             {
                 lblError.Text = "Nesprávne meno alebo heslo!";
-                txtPassword.Clear();
             }
+        }
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) HandleLogin();
         }
     }
 }

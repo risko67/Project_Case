@@ -10,5 +10,8 @@ namespace Project_Case
     public partial class App : Application
     {
     }
-
+    public static class GameData
+    {
+        public static List<Skin> MySkins = new List<Skin>();
+    }
 }

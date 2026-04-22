@@ -1,12 +1,30 @@
-﻿<Window x:Class="Project_Case.CaseOpening"
+﻿<Window x:Class="CS2_CaseOpening.CaseOpening"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Project_Case"
-        mc:Ignorable="d"
-        Title="CaseOpening" Height="450" Width="800">
-    <Grid>
-        
+        Title="Opening Case..." Height="400" Width="800" 
+        Background="#121212" WindowStartupLocation="CenterScreen">
+
+    <Grid VerticalAlignment="Center">
+        <StackPanel>
+            <Border BorderBrush="#FFD700" BorderThickness="2" Height="150" Margin="0,20" 
+                    Background="#1a1a1a" HorizontalAlignment="Stretch" ClipToBounds="True">
+                <Grid>
+                    <Canvas x:Name="SkinsCanvas" Height="150" VerticalAlignment="Center"/>
+
+                    <Rectangle Width="3" Fill="Red" Height="150" HorizontalAlignment="Center" Panel.ZIndex="10"/>
+                </Grid>
+            </Border>
+
+            <Button x:Name="btnSpin" Content="OPEN CASE (2.50€)" Width="200" Height="50" 
+                    Background="#FFD700" FontWeight="Bold" FontSize="16" Click="btnSpin_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <TextBlock x:Name="txtStatus" Foreground="White" HorizontalAlignment="Center" Margin="0,10" FontSize="14"/>
+        </StackPanel>
     </Grid>
 </Window>
