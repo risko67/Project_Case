@@ -10,11 +10,15 @@
 
   <ItemGroup>
     <None Remove="Chroma Case\AK-47 Cartel Chroma.webp" />
+    <None Remove="Chroma Case\Chroma Case – odkaz.lnk" />
     <None Remove="Chroma Case\Chroma Case.webp" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Chroma Case\AK-47 Cartel Chroma.webp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Chroma Case\Chroma Case – odkaz.lnk">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Chroma Case\Chroma Case.webp">
