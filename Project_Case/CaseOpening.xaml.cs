@@ -91,7 +91,7 @@ namespace CS2_CaseOpening
 
             DoubleAnimation anim = new DoubleAnimation
             {
-                To = targetX,
+                To = targetX, 
                 Duration = TimeSpan.FromSeconds(5),
                 EasingFunction = new QuarticEase { EasingMode = EasingMode.EaseOut }
             };
