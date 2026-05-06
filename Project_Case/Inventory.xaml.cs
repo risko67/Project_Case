@@ -14,30 +14,32 @@ namespace CS2_CaseOpening
             InitializeComponent();
             _mode = mode;
 
-            // Nastavenie nadpisu podľa toho, čo sme vybrali v Menu
-            if (txtTitle != null)
-                txtTitle.Text = _mode == "Cases" ? "MOJE BEDNE" : "MOJE SKINY";
+            txtTitle.Text = _mode == "Cases" ? "MOJE BEDNE" : "MOJE SKINY";
 
             LoadItems();
         }
 
         private void LoadItems()
         {
-            // Odkaz na tvoj UniformGrid v XAML
-            if (InventoryGrid == null) return;
             InventoryGrid.Children.Clear();
 
             if (_mode == "Cases")
             {
-                // Zobrazíme bedňu (uisti sa, že máš obrázok v Images/case.png)
-                InventoryGrid.Children.Add(CreateSlot("Images/case.png", "Gold", "Case"));
+                InventoryGrid.Children.Add(CreateSlot(
+                    "Images/case.png",
+                    "Gold",
+                    "Case"
+                ));
             }
             else
             {
-                // Zobrazíme vyhraté skiny
                 foreach (var skin in GameData.MySkins)
                 {
-                    InventoryGrid.Children.Add(CreateSlot(skin.ImagePath, skin.Rarity, "Skin"));
+                    InventoryGrid.Children.Add(CreateSlot(
+                        skin.ImagePath,
+                        skin.Rarity,
+                        "Skin"
+                    ));
                 }
             }
         }
@@ -52,7 +54,6 @@ namespace CS2_CaseOpening
                 Width = 150
             };
 
-            // Pokus o načítanie obrázku
             try
             {
                 btn.Content = new Image
@@ -63,10 +64,15 @@ namespace CS2_CaseOpening
             }
             catch
             {
-                btn.Content = new TextBlock { Text = "Foto", Foreground = System.Windows.Media.Brushes.Gray };
+                btn.Content = new TextBlock
+                {
+                    Text = "No Image",
+                    Foreground = System.Windows.Media.Brushes.Gray
+                };
             }
 
-            btn.Click += (s, e) => {
+            btn.Click += (s, e) =>
+            {
                 if (tag == "Case")
                 {
                     CaseOpening openWin = new CaseOpening();
@@ -75,7 +81,6 @@ namespace CS2_CaseOpening
                 }
                 else
                 {
-                    // Tu môžeš otvoriť SkinDetailWindow
                     MessageBox.Show("Prehliadka skinu...");
                 }
             };
@@ -85,11 +90,9 @@ namespace CS2_CaseOpening
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            // NÁVRAT DO MENU
             MenuWindow menu = new MenuWindow();
             menu.Show();
             this.Close();
         }
-        
     }
 }
