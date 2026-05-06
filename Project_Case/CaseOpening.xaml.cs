@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace CS2_CaseOpening
 {
@@ -35,16 +36,16 @@ namespace CS2_CaseOpening
 
         private List<Skin> availableSkins = new List<Skin>()
         {
-            new Skin { Name = "Glock-18 | Skin 1", Rarity = "Blue", ImageFile =  },
-            new Skin { Name = "USP-S | Skin 2", Rarity = "Blue", ImageFile =  },
+            new Skin { Name = "M4A4 | Choppa", Rarity = "Blue", ImagePath = "Images/M4A4_Choppa.png" },
+            
 
-            new Skin { Name = "P90 | Skin 3", Rarity = "Purple", ImageFile =  },
+            new Skin { Name = "Galil AR | Control", Rarity = "Purple", ImagePath = "Images/GalilAR_Control.png" },
 
-            new Skin { Name = "Desert Eagle | Skin 4", Rarity = "Pink", ImageFile =  },
+            new Skin { Name = "Glock-18 | Shinobu", Rarity = "Pink", ImagePath = "Images/Glock18_Shinobu.png" },
 
-            new Skin { Name = "AK-47 | Skin 5", Rarity = "Red", ImageFile =  },
+            new Skin { Name = "AWP | Printstream", Rarity = "Red", ImagePath = "Images/AWP_Printstream.png" },
 
-            new Skin { Name = "AWP | Dragon Lore", Rarity = "Gold", ImageFile =  }
+            new Skin { Name = "Skeleton Knife | Doppler", Rarity = "Gold", ImagePath = "Images/SkeletonKnife_Doppler.png"  }
         };
 
         public CaseOpening()
@@ -103,6 +104,33 @@ namespace CS2_CaseOpening
                 _ => Brushes.Blue
             };
 
+            StackPanel panel = new StackPanel
+            {
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+
+            if (!string.IsNullOrEmpty(skin.ImagePath))
+            {
+                Image img = new Image
+                {
+                    Width = 100,
+                    Height = 70,
+                    Stretch = Stretch.Uniform,
+                    Source = new BitmapImage(new Uri(skin.ImagePath, UriKind.Relative))
+                };
+
+                panel.Children.Add(img);
+            }
+
+            panel.Children.Add(new TextBlock
+            {
+                Text = skin.Name,
+                Foreground = Brushes.White,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                TextWrapping = TextWrapping.Wrap
+            });
+
             return new Border
             {
                 Width = itemWidth,
@@ -111,17 +139,9 @@ namespace CS2_CaseOpening
                 BorderBrush = color,
                 BorderThickness = new Thickness(0, 0, 0, 5),
                 Margin = new Thickness(2),
-                Child = new TextBlock
-                {
-                    Text = skin.Name,
-                    Foreground = Brushes.White,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    TextWrapping = TextWrapping.Wrap
-                }
+                Child = panel
             };
         }
-
         private void btnSpin_Click(object sender, RoutedEventArgs e)
         {
             btnSpin.IsEnabled = false;

@@ -26,9 +26,10 @@ namespace CS2_CaseOpening
             if (_mode == "Cases")
             {
                 InventoryGrid.Children.Add(CreateSlot(
-                    "Images/case.png",
+                    "Images/FeverCase.png",
                     "Gold",
                     "Case"
+
                 ));
             }
             else
