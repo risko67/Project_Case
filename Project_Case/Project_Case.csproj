@@ -12,35 +12,41 @@
     <None Remove="Images\AK47_Skin5.png" />
     <None Remove="Images\AWP_DragonLore.png" />
     <None Remove="Images\AWP_Printstream.png" />
+    <None Remove="Images\ButterflyKnife_Autotronic.png" />
     <None Remove="Images\case.png" />
     <None Remove="Images\DesertEagle_Skin4.png" />
+    <None Remove="Images\Dreams&amp;NightmaresCase.png" />
+    <None Remove="Images\FAMAS_RapidEyeMovement.png" />
     <None Remove="Images\FeverCase.png" />
+    <None Remove="Images\Five-SeveN_Scrawl.png" />
     <None Remove="Images\GalilAR_Control.png" />
     <None Remove="Images\Glock18_Shinobu.png" />
     <None Remove="Images\Glock18_Skin1.png" />
     <None Remove="Images\M4A4_Choppa.png" />
+    <None Remove="Images\MP9_StarlightProtector.png" />
     <None Remove="Images\P90_Skin3.png" />
     <None Remove="Images\SkeletonKnife_Doppler.png" />
+    <None Remove="Images\USP-S_TickettoHell.png" />
     <None Remove="Images\USP_Skin2.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Images\AK47_Skin5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\AWP_DragonLore.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Images\AWP_Printstream.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\case.png">
+    <Content Include="Images\ButterflyKnife_Autotronic.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\DesertEagle_Skin4.png">
+    <Content Include="Images\Dreams&amp;NightmaresCase.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\FAMAS_RapidEyeMovement.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\FeverCase.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Five-SeveN_Scrawl.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\GalilAR_Control.png">
@@ -49,19 +55,16 @@
     <Content Include="Images\Glock18_Shinobu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Glock18_Skin1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Images\M4A4_Choppa.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\P90_Skin3.png">
+    <Content Include="Images\MP9_StarlightProtector.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\SkeletonKnife_Doppler.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\USP_Skin2.png">
+    <Content Include="Images\USP-S_TickettoHell.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

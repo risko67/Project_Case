@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace CS2_CaseOpening
@@ -19,18 +20,78 @@ namespace CS2_CaseOpening
             LoadItems();
         }
 
+        private UIElement CreateSlot(string imagePath, string rarity, string name, object data)
+        {
+            Border slot = new Border
+            {
+                Width = 120,
+                Height = 120,
+                Margin = new Thickness(5),
+                Background = new SolidColorBrush(Color.FromRgb(30, 30, 30)),
+                BorderThickness = new Thickness(2),
+                BorderBrush = Brushes.Gray,
+                Cursor = System.Windows.Input.Cursors.Hand
+            };
+
+            StackPanel panel = new StackPanel
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+
+            if (!string.IsNullOrEmpty(imagePath))
+            {
+                Image img = new Image
+                {
+                    Width = 80,
+                    Height = 60,
+                    Stretch = System.Windows.Media.Stretch.Uniform,
+                    Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(imagePath, UriKind.Relative))
+                };
+
+                panel.Children.Add(img);
+            }
+
+            panel.Children.Add(new TextBlock
+            {
+                Text = name,
+                Foreground = Brushes.White,
+                TextAlignment = TextAlignment.Center,
+                TextWrapping = TextWrapping.Wrap
+            });
+
+            slot.Child = panel;
+
+            slot.MouseLeftButtonUp += (s, e) =>
+            {
+                if (data is Case c)
+                {
+                    CaseOpening openWin = new CaseOpening(c);
+                    openWin.Show();
+                }
+                else if (data is Skin skin)
+                {
+                    MessageBox.Show($"Skin: {skin.Name}");
+                }
+            };
+
+            return slot;
+        }
         private void LoadItems()
         {
             InventoryGrid.Children.Clear();
 
             if (_mode == "Cases")
             {
-                InventoryGrid.Children.Add(CreateSlot(
-                    "Images/FeverCase.png",
-                    "Gold",
-                    "Case"
-
-                ));
+                foreach (var c in GameData.Cases)
+                {
+                    InventoryGrid.Children.Add(CreateSlot(
+                        c.ImagePath,
+                        "Gold",
+                        c.Name,
+                        c
+                    ));
+                }
             }
             else
             {
@@ -39,12 +100,12 @@ namespace CS2_CaseOpening
                     InventoryGrid.Children.Add(CreateSlot(
                         skin.ImagePath,
                         skin.Rarity,
-                        "Skin"
+                        skin.Name,
+                        skin
                     ));
                 }
             }
         }
-
         private Button CreateSlot(string imagePath, string rarity, string tag)
         {
             Button btn = new Button
@@ -76,8 +137,8 @@ namespace CS2_CaseOpening
             {
                 if (tag == "Case")
                 {
-                    CaseOpening openWin = new CaseOpening();
-                    openWin.Show();
+                    CaseOpening openWin = new CaseOpening(GameData.Cases[0]);
+                    openWin.Show();                   
                     this.Close();
                 }
                 else

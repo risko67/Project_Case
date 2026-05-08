@@ -15,10 +15,7 @@ namespace CS2_CaseOpening
         public string ImagePath { get; set; }
     }
 
-    public static class GameData
-    {
-        public static List<Skin> MySkins = new List<Skin>();
-    }
+   
 
     public partial class CaseOpening : Window
     {
@@ -34,23 +31,14 @@ namespace CS2_CaseOpening
               { "Gold", 5.0 }
         };
 
-        private List<Skin> availableSkins = new List<Skin>()
-        {
-            new Skin { Name = "M4A4 | Choppa", Rarity = "Blue", ImagePath = "Images/M4A4_Choppa.png" },
-            
 
-            new Skin { Name = "Galil AR | Control", Rarity = "Purple", ImagePath = "Images/GalilAR_Control.png" },
+        private Case currentCase;
 
-            new Skin { Name = "Glock-18 | Shinobu", Rarity = "Pink", ImagePath = "Images/Glock18_Shinobu.png" },
-
-            new Skin { Name = "AWP | Printstream", Rarity = "Red", ImagePath = "Images/AWP_Printstream.png" },
-
-            new Skin { Name = "Skeleton Knife | Doppler", Rarity = "Gold", ImagePath = "Images/SkeletonKnife_Doppler.png"  }
-        };
-
-        public CaseOpening()
+        public CaseOpening(Case selectedCase)
         {
             InitializeComponent();
+
+            currentCase = selectedCase;
         }
 
         private string RollRarity()
@@ -61,6 +49,7 @@ namespace CS2_CaseOpening
             foreach (var kvp in rarityChances)
             {
                 cumulative += kvp.Value;
+
                 if (roll <= cumulative)
                     return kvp.Key;
             }
@@ -70,10 +59,10 @@ namespace CS2_CaseOpening
 
         private Skin GetRandomSkinByRarity(string rarity)
         {
-            var skins = availableSkins.FindAll(s => s.Rarity == rarity);
+            var skins = currentCase.Skins.FindAll(s => s.Rarity == rarity);
+
             return skins[rnd.Next(skins.Count)];
         }
-
         private void PrepareCrate(Skin forcedWinner, int winningIndex)
         {
             SkinsCanvas.Children.Clear();
