@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="Images\AK47_Skin5.png" />
     <None Remove="Images\AWP_DragonLore.png" />
+    <None Remove="Images\AWP_Phobos.png" />
     <None Remove="Images\AWP_Printstream.png" />
     <None Remove="Images\ButterflyKnife_Autotronic.png" />
     <None Remove="Images\case.png" />
@@ -20,10 +21,15 @@
     <None Remove="Images\FeverCase.png" />
     <None Remove="Images\Five-SeveN_Scrawl.png" />
     <None Remove="Images\GalilAR_Control.png" />
+    <None Remove="Images\GammaCase.png" />
     <None Remove="Images\Glock18_Shinobu.png" />
     <None Remove="Images\Glock18_Skin1.png" />
+    <None Remove="Images\Karambit_GammaDoppler.png" />
+    <None Remove="Images\M4A1-S_MechaIndustries.png" />
     <None Remove="Images\M4A4_Choppa.png" />
+    <None Remove="Images\MAC-10_Carnivore.png" />
     <None Remove="Images\MP9_StarlightProtector.png" />
+    <None Remove="Images\P2000_ImperialDragon.png" />
     <None Remove="Images\P90_Skin3.png" />
     <None Remove="Images\SkeletonKnife_Doppler.png" />
     <None Remove="Images\USP-S_TickettoHell.png" />
@@ -31,6 +37,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Images\AWP_Phobos.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\AWP_Printstream.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -52,13 +61,28 @@
     <Content Include="Images\GalilAR_Control.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\GammaCase.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Glock18_Shinobu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Karambit_GammaDoppler.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\M4A1-S_MechaIndustries.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\M4A4_Choppa.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\MAC-10_Carnivore.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\MP9_StarlightProtector.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\P2000_ImperialDragon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\SkeletonKnife_Doppler.png">

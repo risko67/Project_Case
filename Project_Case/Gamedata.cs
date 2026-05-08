@@ -4,10 +4,8 @@ namespace CS2_CaseOpening
 {
     public static class GameData
     {
-        
         public static List<Skin> MySkins = new List<Skin>();
 
-       
         public static List<Case> Cases = new List<Case>()
         {
             new Case
@@ -52,7 +50,6 @@ namespace CS2_CaseOpening
                         ImagePath = "Images/SkeletonKnife_Doppler.png"
                     }
                 }
-            
             },
             new Case
             {
@@ -96,10 +93,50 @@ namespace CS2_CaseOpening
                         ImagePath = "Images/ButterflyKnife_Autotronic.png"
                     }
                 }
+            },
+            new Case
+            {
+                Name = "Gamma Case",
+                ImagePath = "Images/GammaCase.png",
+
+                Skins = new List<Skin>()
+                {
+                    new Skin
+                    {
+                        Name = "MAC-10 | Carnivore",
+                        Rarity = "Blue",
+                        ImagePath = "Images/MAC-10_Carnivore.png"
+                    },
+
+                    new Skin
+                    {
+                        Name = "AWP | Phobos,",
+                        Rarity = "Purple",
+                        ImagePath = "Images/AWP_Phobos.png"
+                    },
+
+                    new Skin
+                    {
+                        Name = "P2000 | Imperial Dragon",
+                        Rarity = "Pink",
+                        ImagePath = "Images/P2000_ImperialDragon.png"
+                    },
+
+                    new Skin
+                    {
+                        Name = "M4A1-S| Mecha Industries",
+                        Rarity = "Red",
+                        ImagePath = "Images/M4A1-S_MechaIndustries.png"
+                    },
+
+                    new Skin
+                    {
+                        Name = "Karambit | Gamma Doppler",
+                        Rarity = "Gold",
+                        ImagePath = "Images/Karambit_GammaDoppler.png"
+                    }
+                }
             }
         };
     }
 }
-    
-    
-   
