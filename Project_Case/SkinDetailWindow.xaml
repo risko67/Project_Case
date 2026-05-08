@@ -4,13 +4,13 @@
         Title="Skin Detail" Height="400" Width="500" 
         Background="#1a1a1a" WindowStartupLocation="CenterOwner" AllowsTransparency="False" WindowStyle="ThreeDBorderWindow">
 
-    <Grid Margin="20">
+    <Grid Margin="20,0,20,-6">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock x:Name="txtSkinName" Text="SKIN NAME" Foreground="White" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <TextBlock x:Name="txtRarity" Text="Covert" Foreground="#eb4b4b" HorizontalAlignment="Center" Margin="0,5,0,20"/>
+            <TextBlock x:Name="txtSkinName" Foreground="White" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="txtRarity" Foreground="#eb4b4b" HorizontalAlignment="Center" Margin="0,5,0,20"/>
 
             <Border BorderBrush="#333" BorderThickness="2" Background="#121212" Width="250" Height="180" CornerRadius="10">
-                <Image x:Name="imgSkin" Source="fotka2.png" Margin="20"/>
+            <Image x:Name="imgSkin" Margin="20"/>
             </Border>
 
             <UniformGrid Columns="2" Margin="0,30,0,0">

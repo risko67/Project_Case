@@ -9,9 +9,18 @@ namespace CS2_CaseOpening
     public partial class Inventory : Window
     {
         private string _mode;
+        private CaseOpening _openCaseWindow;
+        public static Inventory Instance;
 
         public Inventory(string mode)
         {
+            if (Instance != null)
+            {
+                Instance.Close();
+            }
+
+            Instance = this;
+
             InitializeComponent();
             _mode = mode;
 
@@ -19,7 +28,14 @@ namespace CS2_CaseOpening
 
             LoadItems();
         }
-
+        protected override void OnClosed(EventArgs e)
+        {
+            if (Instance != null)
+            {
+                Instance.Focus();
+                return;
+            }
+        }
         private UIElement CreateSlot(string imagePath, string rarity, string name, object data)
         {
             Border slot = new Border
@@ -36,20 +52,35 @@ namespace CS2_CaseOpening
             StackPanel panel = new StackPanel
             {
                 HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center
+                VerticalAlignment = VerticalAlignment.Center,
+                IsHitTestVisible = false
             };
 
-            if (!string.IsNullOrEmpty(imagePath))
+            if (!string.IsNullOrWhiteSpace(imagePath))
             {
-                Image img = new Image
+                try
                 {
-                    Width = 80,
-                    Height = 60,
-                    Stretch = System.Windows.Media.Stretch.Uniform,
-                    Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(imagePath, UriKind.Relative))
-                };
+                    Image img = new Image
+                    {
+                        Width = 80,
+                        Height = 60,
+                        Stretch = Stretch.Uniform,
+                        Source = new BitmapImage(
+                            new Uri(imagePath, UriKind.Relative)
+                        )
+                    };
 
-                panel.Children.Add(img);
+                    panel.Children.Add(img);
+                }
+                catch
+                {
+                    panel.Children.Add(new TextBlock
+                    {
+                        Text = "IMG ERROR",
+                        Foreground = Brushes.Gray,
+                        HorizontalAlignment = HorizontalAlignment.Center
+                    });
+                }
             }
 
             panel.Children.Add(new TextBlock
@@ -66,18 +97,29 @@ namespace CS2_CaseOpening
             {
                 if (data is Case c)
                 {
-                    CaseOpening openWin = new CaseOpening(c);
-                    openWin.Show();
+                    if (_openCaseWindow != null)
+                        _openCaseWindow.Close();
+
+                    _openCaseWindow = new CaseOpening(c);
+                    _openCaseWindow.Show();
                 }
                 else if (data is Skin skin)
                 {
-                    MessageBox.Show($"Skin: {skin.Name}");
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        SkinDetailWindow win = new SkinDetailWindow(skin);
+                        win.Owner = Application.Current.MainWindow;
+                        win.Show();
+                    }));
+
                 }
+              
             };
 
             return slot;
         }
-        private void LoadItems()
+
+        public void LoadItems()
         {
             InventoryGrid.Children.Clear();
 
@@ -95,7 +137,7 @@ namespace CS2_CaseOpening
             }
             else
             {
-                foreach (var skin in GameData.MySkins)
+                foreach (var skin in GameData.MySkins.ToList())
                 {
                     InventoryGrid.Children.Add(CreateSlot(
                         skin.ImagePath,
@@ -106,55 +148,12 @@ namespace CS2_CaseOpening
                 }
             }
         }
-        private Button CreateSlot(string imagePath, string rarity, string tag)
-        {
-            Button btn = new Button
-            {
-                Style = (Style)this.Resources["InventoryButtonStyle"],
-                Tag = rarity,
-                Height = 150,
-                Width = 150
-            };
-
-            try
-            {
-                btn.Content = new Image
-                {
-                    Source = new BitmapImage(new Uri($"pack://application:,,,/{imagePath}", UriKind.Absolute)),
-                    Margin = new Thickness(10)
-                };
-            }
-            catch
-            {
-                btn.Content = new TextBlock
-                {
-                    Text = "No Image",
-                    Foreground = System.Windows.Media.Brushes.Gray
-                };
-            }
-
-            btn.Click += (s, e) =>
-            {
-                if (tag == "Case")
-                {
-                    CaseOpening openWin = new CaseOpening(GameData.Cases[0]);
-                    openWin.Show();                   
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Prehliadka skinu...");
-                }
-            };
-
-            return btn;
-        }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             MenuWindow menu = new MenuWindow();
             menu.Show();
-            this.Close();
+            
         }
     }
 }
