@@ -136,7 +136,46 @@ namespace CS2_CaseOpening
                         ImagePath = "Images/Karambit_GammaDoppler.png"
                     }
                 }
-            }
-        };
-    }
+
+            },
+        new Case
+            {
+                Name = "Danger Zone Case",
+                ImagePath = "Images/DangerZoneCase.png",
+                Skins = new List<Skin>()
+                {
+                    new Skin
+                    {
+                        Name = "Tec-9 | Fubar",
+                        Rarity = "Blue",
+                        ImagePath = "Images/Tec-9_Fubar.png"
+                    },
+                    new Skin
+                    {
+                        Name = "P250 | Nevermore",
+                        Rarity = "Purple",
+                        ImagePath = "Images/P250_Nevermore.png"
+                    },
+                    new Skin
+                    {
+                        Name = "UMP-45 | Momentum",
+                        Rarity = "Pink",
+                        ImagePath = "Images/UMP-45_Momentum.png"
+                    },
+                    new Skin
+                    {
+                        Name = "AK-47 | Asiimov",
+                        Rarity = "Red",
+                        ImagePath = "Images/AK-47_Asiimov.png"
+                    },
+                    new Skin
+                    {
+                        Name = "Talon Knife | Fade",
+                        Rarity = "Gold",
+                        ImagePath = "Images/TalonKnife_Fade.png"
+                    }
+                   }
+                }
+            };
+         }
 }

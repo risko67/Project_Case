@@ -9,12 +9,16 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace CS2_CaseOpening
 {
     public partial class SkinDetailWindow : Window
     {
         private Skin _skin;
+
+
+        
 
         public SkinDetailWindow(Skin skin)
         {
@@ -25,31 +29,36 @@ namespace CS2_CaseOpening
             txtSkinName.Text = skin.Name;
             txtRarity.Text = skin.Rarity;
 
-            imgSkin.Source = new System.Windows.Media.Imaging.BitmapImage(
+            switch (skin.Rarity)
+            {
+                case "Blue":
+                    txtRarity.Foreground = Brushes.DeepSkyBlue;
+                    break;
+
+                case "Purple":
+                    txtRarity.Foreground = Brushes.MediumPurple;
+                    break;
+
+                case "Pink":
+                    txtRarity.Foreground = Brushes.DeepPink;
+                    break;
+
+                case "Red":
+                    txtRarity.Foreground = Brushes.Red;
+                    break;
+
+                case "Gold":
+                    txtRarity.Foreground = Brushes.Gold;
+                    break;
+
+                default:
+                    txtRarity.Foreground = Brushes.White;
+                    break;
+            }
+
+            imgSkin.Source = new BitmapImage(
                 new Uri(skin.ImagePath, UriKind.Relative)
             );
-        }
-        public SkinDetailWindow(string name, string rarity, string imagePath)
-        {
-            InitializeComponent();
-
-            txtSkinName.Text = name;
-            txtRarity.Text = rarity;
-
-            imgSkin.Source = new System.Windows.Media.Imaging.BitmapImage(
-                new Uri(imagePath, UriKind.Relative)
-            );
-
-            // farba podľa rarity (voliteľné)
-            txtRarity.Foreground = rarity switch
-            {
-                "Blue" => Brushes.Blue,
-                "Red" => Brushes.Red,
-                "Gold" => Brushes.Gold,
-                "Pink" => Brushes.DeepPink,
-                "Purple" => Brushes.Purple,
-                _ => Brushes.White
-            };
         }
         private void btnSell_Click(object sender, RoutedEventArgs e)
         {

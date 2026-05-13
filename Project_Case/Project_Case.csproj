@@ -9,12 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\AK-47_Asiimov.png" />
     <None Remove="Images\AK47_Skin5.png" />
     <None Remove="Images\AWP_DragonLore.png" />
     <None Remove="Images\AWP_Phobos.png" />
     <None Remove="Images\AWP_Printstream.png" />
     <None Remove="Images\ButterflyKnife_Autotronic.png" />
     <None Remove="Images\case.png" />
+    <None Remove="Images\DangerZoneCase.png" />
     <None Remove="Images\DesertEagle_Skin4.png" />
     <None Remove="Images\Dreams&amp;NightmaresCase.png" />
     <None Remove="Images\FAMAS_RapidEyeMovement.png" />
@@ -30,13 +32,20 @@
     <None Remove="Images\MAC-10_Carnivore.png" />
     <None Remove="Images\MP9_StarlightProtector.png" />
     <None Remove="Images\P2000_ImperialDragon.png" />
+    <None Remove="Images\P250_Nevermore.png" />
     <None Remove="Images\P90_Skin3.png" />
     <None Remove="Images\SkeletonKnife_Doppler.png" />
+    <None Remove="Images\TalonKnife_Fade.png" />
+    <None Remove="Images\Tec-9_Fubar.png" />
+    <None Remove="Images\UMP-45_Momentum.png" />
     <None Remove="Images\USP-S_TickettoHell.png" />
     <None Remove="Images\USP_Skin2.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Images\AK-47_Asiimov.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\AWP_Phobos.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -44,6 +53,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\ButterflyKnife_Autotronic.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\DangerZoneCase.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Dreams&amp;NightmaresCase.png">
@@ -85,7 +97,19 @@
     <Content Include="Images\P2000_ImperialDragon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\P250_Nevermore.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\SkeletonKnife_Doppler.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\TalonKnife_Fade.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Tec-9_Fubar.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\UMP-45_Momentum.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\USP-S_TickettoHell.png">

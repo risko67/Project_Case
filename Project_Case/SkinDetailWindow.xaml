@@ -7,7 +7,7 @@
     <Grid Margin="20,0,20,-6">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock x:Name="txtSkinName" Foreground="White" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center"/>
-            <TextBlock x:Name="txtRarity" Foreground="#eb4b4b" HorizontalAlignment="Center" Margin="0,5,0,20"/>
+            <TextBlock x:Name="txtRarity"  HorizontalAlignment="Center" Margin="0,5,0,20"/>
 
             <Border BorderBrush="#333" BorderThickness="2" Background="#121212" Width="250" Height="180" CornerRadius="10">
             <Image x:Name="imgSkin" Margin="20"/>
