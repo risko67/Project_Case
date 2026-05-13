@@ -12,6 +12,6 @@ namespace Project_Case
     }
     public static class GameData
     {
-        public static List<Skin> MySkins = new List<Skin>();
+        public static List<Skin> MySkins = new List<Skin>(); 
     }
 }

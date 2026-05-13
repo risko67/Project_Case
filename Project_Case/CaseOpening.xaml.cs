@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_Case;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,61 +9,76 @@ using System.Windows.Media.Imaging;
 
 namespace CS2_CaseOpening
 {
-    public class Skin
-    {
-        public string Name { get; set; }
-        public string Rarity { get; set; }
-        public string ImagePath { get; set; }
-    }
-
-   
-
     public partial class CaseOpening : Window
     {
-        private Random rnd = new Random();
-        private double itemWidth = 130;
+        Random rnd = new Random();
 
-        private Dictionary<string, double> rarityChances = new Dictionary<string, double>()
+        double itemWidth = 130;
+
+        Dictionary<string, double> rarityChances = new Dictionary<string, double>()
         {
-              { "Blue", 50.0 },
-              { "Purple", 20.0 },
-              { "Pink", 15.0 },
-              { "Red", 10.0 },
-              { "Gold", 5.0 }
+            { "Blue", 50.0 },
+            { "Purple", 20.0 },
+            { "Pink", 15.0 },
+            { "Red", 10.0 },
+            { "Gold", 5.0 }
         };
-
 
         private Case currentCase;
 
         public CaseOpening(Case selectedCase)
         {
             InitializeComponent();
-
             currentCase = selectedCase;
         }
 
         private string RollRarity()
         {
             double roll = rnd.NextDouble() * 100;
-            double cumulative = 0;
+            double total = 0;
 
-            foreach (var kvp in rarityChances)
+            foreach (var item in rarityChances)
             {
-                cumulative += kvp.Value;
+                total += item.Value;
 
-                if (roll <= cumulative)
-                    return kvp.Key;
+                if (roll <= total)
+                    return item.Key;
             }
 
             return "Blue";
+        }
+
+        private void GenerateFloat(Skin skin)
+        {
+            int r = rnd.Next(1, 6);
+
+            if (r == 1) skin.Wear = "Factory New";
+            else if (r == 2) skin.Wear = "Minimal Wear";
+            else if (r == 3) skin.Wear = "Field-Tested";
+            else if (r == 4) skin.Wear = "Well-Worn";
+            else skin.Wear = "Battle-Scarred";
         }
 
         private Skin GetRandomSkinByRarity(string rarity)
         {
             var skins = currentCase.Skins.FindAll(s => s.Rarity == rarity);
 
-            return skins[rnd.Next(skins.Count)];
+            var baseSkin = skins[rnd.Next(skins.Count)];
+
+            Skin newSkin = new Skin
+            {
+                Id = Guid.NewGuid(),
+                Name = baseSkin.Name,
+                Rarity = baseSkin.Rarity,
+                ImagePath = baseSkin.ImagePath,
+                Price = baseSkin.Price
+            };
+
+            GenerateFloat(newSkin);
+
+            return newSkin;
         }
+
         private void PrepareCrate(Skin forcedWinner, int winningIndex)
         {
             SkinsCanvas.Children.Clear();
@@ -76,9 +92,11 @@ namespace CS2_CaseOpening
                 else
                     skin = GetRandomSkinByRarity(RollRarity());
 
-                Border b = CreateSkinElement(skin);
-                Canvas.SetLeft(b, i * (itemWidth + 5));
-                SkinsCanvas.Children.Add(b);
+                Border border = CreateSkinElement(skin);
+
+                Canvas.SetLeft(border, i * (itemWidth + 5));
+
+                SkinsCanvas.Children.Add(border);
             }
         }
 
@@ -86,44 +104,44 @@ namespace CS2_CaseOpening
         {
             Brush color = skin.Rarity switch
             {
+                "Purple" => Brushes.Purple,
+                "Pink" => Brushes.DeepPink,
                 "Red" => Brushes.Red,
                 "Gold" => Brushes.Gold,
-                "Pink" => Brushes.DeepPink,
-                "Purple" => Brushes.Purple,
                 _ => Brushes.Blue
             };
 
-            StackPanel panel = new StackPanel
-            {
-                VerticalAlignment = VerticalAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Center
-            };
+            StackPanel panel = new StackPanel();
 
             if (!string.IsNullOrEmpty(skin.ImagePath))
             {
-                Image img = new Image
+                panel.Children.Add(new Image
                 {
                     Width = 100,
                     Height = 70,
                     Stretch = Stretch.Uniform,
                     Source = new BitmapImage(new Uri(skin.ImagePath, UriKind.Relative))
-                };
-
-                panel.Children.Add(img);
+                });
             }
 
             panel.Children.Add(new TextBlock
             {
                 Text = skin.Name,
                 Foreground = Brushes.White,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                TextWrapping = TextWrapping.Wrap
+                HorizontalAlignment = HorizontalAlignment.Center
+            });
+
+            panel.Children.Add(new TextBlock
+            {
+                Text = skin.Wear,
+                Foreground = Brushes.LightGray,
+                HorizontalAlignment = HorizontalAlignment.Center
             });
 
             return new Border
             {
                 Width = itemWidth,
-                Height = 130,
+                Height = 150,
                 Background = new SolidColorBrush(Color.FromRgb(30, 30, 30)),
                 BorderBrush = color,
                 BorderThickness = new Thickness(0, 0, 0, 5),
@@ -131,21 +149,23 @@ namespace CS2_CaseOpening
                 Child = panel
             };
         }
+
         private void btnSpin_Click(object sender, RoutedEventArgs e)
         {
             btnSpin.IsEnabled = false;
 
-            
             string rarity = RollRarity();
+
             Skin winningSkin = GetRandomSkinByRarity(rarity);
 
-            
             int winningIndex = rnd.Next(45, 50);
 
-          
             PrepareCrate(winningSkin, winningIndex);
 
-            double targetX = -(winningIndex * (itemWidth + 5) - (this.Width / 2) + (itemWidth / 2));
+            double targetX =
+                -(winningIndex * (itemWidth + 5)
+                - (this.Width / 2)
+                + (itemWidth / 2));
 
             DoubleAnimation anim = new DoubleAnimation
             {
@@ -158,15 +178,19 @@ namespace CS2_CaseOpening
             {
                 GameData.MySkins.Add(winningSkin);
 
-                MessageBox.Show($"Vyhral si: {winningSkin.Name}!", "Výhra");
+                MessageBox.Show(
+                    $"Vyhral si:\n{winningSkin.Name}\n{winningSkin.Wear}"
+                );
 
                 new Inventory("Skins").Show();
                 this.Close();
             };
 
-            TranslateTransform trans = new TranslateTransform();
-            SkinsCanvas.RenderTransform = trans;
-            trans.BeginAnimation(TranslateTransform.XProperty, anim);
+            SkinsCanvas.RenderTransform = new TranslateTransform();
+            SkinsCanvas.RenderTransform.BeginAnimation(
+                TranslateTransform.XProperty,
+                anim
+            );
         }
     }
 }

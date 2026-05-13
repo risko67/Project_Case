@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Project_Case;
+using System.Collections.Generic;
 
 namespace CS2_CaseOpening
 {
     public class Case
     {
-        public string Name { get; set; } = "";
-        public string ImagePath { get; set; } = "";
+        public string Name { get; set; }
+        public string ImagePath { get; set; }
 
-        public List<Skin> Skins { get; set; } = new List<Skin>();
+        public List<Skin> Skins { get; set; }
     }
 }

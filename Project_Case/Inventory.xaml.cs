@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using CS2_CaseOpening;
 
 namespace CS2_CaseOpening
 {
@@ -10,6 +12,7 @@ namespace CS2_CaseOpening
     {
         private string _mode;
         private CaseOpening _openCaseWindow;
+
         public static Inventory Instance;
 
         public Inventory(string mode)
@@ -22,20 +25,39 @@ namespace CS2_CaseOpening
             Instance = this;
 
             InitializeComponent();
+
             _mode = mode;
 
-            txtTitle.Text = _mode == "Cases" ? "MOJE BEDNE" : "MOJE SKINY";
+            txtTitle.Text = _mode == "Cases"
+                ? "MOJE BEDNE"
+                : "MOJE SKINY";
 
+            UpdateBalanceText();
             LoadItems();
         }
+
         protected override void OnClosed(EventArgs e)
         {
-            if (Instance != null)
-            {
-                Instance.Focus();
-                return;
-            }
+            base.OnClosed(e);
+            Instance = null;
         }
+
+        private void UpdateBalanceText()
+        {
+            txtBalance.Text = "Balance: $" + GameData.Balance;
+        }
+
+        private Brush GetRarityColor(string rarity)
+        {
+            if (rarity == "Blue") return Brushes.Blue;
+            if (rarity == "Purple") return Brushes.Purple;
+            if (rarity == "Pink") return Brushes.DeepPink;
+            if (rarity == "Red") return Brushes.Red;
+            if (rarity == "Gold") return Brushes.Gold;
+
+            return Brushes.Gray;
+        }
+
         private UIElement CreateSlot(string imagePath, string rarity, string name, object data)
         {
             Border slot = new Border
@@ -45,7 +67,7 @@ namespace CS2_CaseOpening
                 Margin = new Thickness(5),
                 Background = new SolidColorBrush(Color.FromRgb(30, 30, 30)),
                 BorderThickness = new Thickness(2),
-                BorderBrush = Brushes.Gray,
+                BorderBrush = GetRarityColor(rarity),
                 Cursor = System.Windows.Input.Cursors.Hand
             };
 
@@ -58,64 +80,41 @@ namespace CS2_CaseOpening
 
             if (!string.IsNullOrWhiteSpace(imagePath))
             {
-                try
+                panel.Children.Add(new Image
                 {
-                    Image img = new Image
-                    {
-                        Width = 80,
-                        Height = 60,
-                        Stretch = Stretch.Uniform,
-                        Source = new BitmapImage(
-                            new Uri(imagePath, UriKind.Relative)
-                        )
-                    };
-
-                    panel.Children.Add(img);
-                }
-                catch
-                {
-                    panel.Children.Add(new TextBlock
-                    {
-                        Text = "IMG ERROR",
-                        Foreground = Brushes.Gray,
-                        HorizontalAlignment = HorizontalAlignment.Center
-                    });
-                }
+                    Width = 80,
+                    Height = 60,
+                    Stretch = Stretch.Uniform,
+                    Source = new BitmapImage(new Uri(imagePath, UriKind.RelativeOrAbsolute))
+                });
             }
 
             panel.Children.Add(new TextBlock
             {
                 Text = name,
                 Foreground = Brushes.White,
-                TextAlignment = TextAlignment.Center,
-                TextWrapping = TextWrapping.Wrap
+                TextAlignment = TextAlignment.Center
             });
 
-            slot.Child = panel;
-
-            slot.MouseLeftButtonUp += (s, e) =>
+            // SELL
+            slot.MouseRightButtonUp += (s, e) =>
             {
-                if (data is Case c)
+                if (data is Skin skin)
                 {
-                    if (_openCaseWindow != null)
-                        _openCaseWindow.Close();
+                    var item = GameData.MySkins
+                        .FirstOrDefault(x => x.Id == skin.Id);
 
-                    _openCaseWindow = new CaseOpening(c);
-                    _openCaseWindow.Show();
-                }
-                else if (data is Skin skin)
-                {
-                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        SkinDetailWindow win = new SkinDetailWindow(skin);
-                        win.Owner = Application.Current.MainWindow;
-                        win.Show();
-                    }));
+                    if (item == null) return;
 
+                    GameData.Balance += item.Price;
+                    GameData.MySkins.Remove(item);
+
+                    UpdateBalanceText();
+                    LoadItems();
                 }
-              
             };
 
+            slot.Child = panel;
             return slot;
         }
 
@@ -127,33 +126,24 @@ namespace CS2_CaseOpening
             {
                 foreach (var c in GameData.Cases)
                 {
-                    InventoryGrid.Children.Add(CreateSlot(
-                        c.ImagePath,
-                        "Gold",
-                        c.Name,
-                        c
-                    ));
+                    InventoryGrid.Children.Add(CreateSlot(c.ImagePath, "Gold", c.Name, c));
                 }
             }
             else
             {
                 foreach (var skin in GameData.MySkins.ToList())
                 {
-                    InventoryGrid.Children.Add(CreateSlot(
-                        skin.ImagePath,
-                        skin.Rarity,
-                        skin.Name,
-                        skin
-                    ));
+                    InventoryGrid.Children.Add(CreateSlot(skin.ImagePath, skin.Rarity, skin.Name, skin));
                 }
             }
+
+            UpdateBalanceText();
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            MenuWindow menu = new MenuWindow();
-            menu.Show();
-            
+            new MenuWindow().Show();
+            this.Close();
         }
     }
 }
