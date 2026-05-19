@@ -10,6 +10,9 @@ namespace CS2_CaseOpening
         public string Rarity { get; set; }
         public string ImagePath { get; set; }
 
+        // Numeric float value between 0.0 and 1.0 (lower is generally better condition)
+        public double Float { get; set; }
+
         public string Wear { get; set; }
 
         public int Price { get; set; }

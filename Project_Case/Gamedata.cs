@@ -1,15 +1,24 @@
-﻿using Project_Case;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CS2_CaseOpening
 {
     public static class GameData
     {
         // MONEY SYSTEM
-        public static int Balance = 1000;
 
         // INVENTORY
+        public static double Balance = 100.0;
         public static List<Skin> MySkins = new List<Skin>();
+
+        // Attempt to open a case: costs 2.5 from balance. Returns true if the purchase succeeded.
+        public static bool TryOpenCase(Case selectedCase)
+        {
+            const double CaseCost = 2.5;
+            if (Balance < CaseCost)
+                return false;
+            Balance -= CaseCost;
+            return true;
+        }
 
         // CASES
         public static List<Case> Cases = new List<Case>()

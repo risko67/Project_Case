@@ -1,5 +1,4 @@
-﻿using Project_Case;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -50,12 +49,14 @@ namespace CS2_CaseOpening
 
         private void GenerateFloat(Skin skin)
         {
-            int r = rnd.Next(1, 6);
+            // Generate a float between 0.0 and 1.0
+            skin.Float = Math.Round(rnd.NextDouble(), 4);
 
-            if (r == 1) skin.Wear = "Factory New";
-            else if (r == 2) skin.Wear = "Minimal Wear";
-            else if (r == 3) skin.Wear = "Field-Tested";
-            else if (r == 4) skin.Wear = "Well-Worn";
+            // Derive wear from float (lower float => better condition)
+            if (skin.Float <= 0.07) skin.Wear = "Factory New";
+            else if (skin.Float <= 0.15) skin.Wear = "Minimal Wear";
+            else if (skin.Float <= 0.38) skin.Wear = "Field-Tested";
+            else if (skin.Float <= 0.45) skin.Wear = "Well-Worn";
             else skin.Wear = "Battle-Scarred";
         }
 
@@ -74,9 +75,35 @@ namespace CS2_CaseOpening
                 Price = baseSkin.Price
             };
 
+            // assign float and wear
             GenerateFloat(newSkin);
 
+            // compute price based on rarity and float
+            newSkin.Price = ComputePriceByRarityAndFloat(newSkin.Rarity, newSkin.Float);
+
             return newSkin;
+        }
+
+        private int ComputePriceByRarityAndFloat(string rarity, double fl)
+        {
+            // Price ranges per rarity (min, max)
+            (double min, double max) range = rarity switch
+            {
+                "Blue" => (1.0, 3.0),
+                "Purple" => (3.0, 7.0),
+                "Pink" => (7.0, 30.0),
+                "Red" => (30.0, 90.0),
+                "Gold" => (90.0, 400.0),
+                _ => (1.0, 3.0)
+            };
+
+            // lower float -> higher price, so invert float when interpolating
+            double t = Math.Clamp(1.0 - fl, 0.0, 1.0);
+
+            double price = range.min + t * (range.max - range.min);
+
+            // Round to nearest integer dollar
+            return (int)Math.Round(price);
         }
 
         private void PrepareCrate(Skin forcedWinner, int winningIndex)
@@ -152,6 +179,18 @@ namespace CS2_CaseOpening
 
         private void btnSpin_Click(object sender, RoutedEventArgs e)
         {
+            // cost to open a case
+            const double caseCost = 2.50;
+
+            if (GameData.Balance < caseCost)
+            {
+                MessageBox.Show("Nedostatok prostriedkov. Potrebujete $2.50.", "Nedostatok", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Deduct cost
+            GameData.Balance -= caseCost;
+
             btnSpin.IsEnabled = false;
 
             string rarity = RollRarity();

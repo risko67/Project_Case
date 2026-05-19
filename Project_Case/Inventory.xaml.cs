@@ -44,7 +44,7 @@ namespace CS2_CaseOpening
 
         private void UpdateBalanceText()
         {
-            txtBalance.Text = "Balance: $" + GameData.Balance;
+            txtBalance.Text = $"Balance: ${GameData.Balance:F2}";
         }
 
         private Brush GetRarityColor(string rarity)
@@ -97,7 +97,7 @@ namespace CS2_CaseOpening
             });
 
             // SELL
-            slot.MouseRightButtonUp += (s, e) =>
+            slot.MouseRightButtonUp += (sender, e) =>
             {
                 if (data is Skin skin)
                 {
@@ -110,6 +110,26 @@ namespace CS2_CaseOpening
                     GameData.MySkins.Remove(item);
 
                     UpdateBalanceText();
+                    LoadItems();
+                }
+            };
+
+            // LEFT-CLICK: open case or skin detail
+            slot.MouseLeftButtonUp += (sender, e) =>
+            {
+                if (data is Case c)
+                {
+                    // Open case opening window for this case
+                    var win = new CaseOpening(c);
+                    win.Show();
+                    this.Close();
+                }
+                else if (data is Skin s)
+                {
+                    var detail = new SkinDetailWindow(s);
+                    detail.Owner = this;
+                    detail.ShowDialog();
+                    // Refresh inventory in case skin was sold
                     LoadItems();
                 }
             };
