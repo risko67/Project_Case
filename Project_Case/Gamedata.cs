@@ -4,13 +4,14 @@ namespace CS2_CaseOpening
 {
     public static class GameData
     {
-        // MONEY SYSTEM
+        
+        public static string CurrencySymbol = "€";
 
-        // INVENTORY
         public static double Balance = 100.0;
+        public static string BalanceFormatted => $"{CurrencySymbol}{Balance:0.00}";
+
         public static List<Skin> MySkins = new List<Skin>();
 
-        // Attempt to open a case: costs 2.5 from balance. Returns true if the purchase succeeded.
         public static bool TryOpenCase(Case selectedCase)
         {
             const double CaseCost = 2.5;
@@ -20,7 +21,6 @@ namespace CS2_CaseOpening
             return true;
         }
 
-        // CASES
         public static List<Case> Cases = new List<Case>()
         {
             new Case
@@ -196,6 +196,163 @@ namespace CS2_CaseOpening
                         ImagePath = "Images/TalonKnife_Fade.png",
                         Price = 220
                     }
+                }
+            },
+            new Case
+            {
+                Name = "Breakout Case",
+                ImagePath = "Images/BreakoutCase.png",
+                Skins = new List<Skin>()
+                {
+                    new Skin
+                    {
+                        Name = "MP7 | Urban Hazard",
+                        Rarity = "Blue",
+                        ImagePath = "Images/MP7_UrbanHazard.png",
+                        Price = 5
+                    },
+                    new Skin
+                    {
+                        Name = "CZ75-Auto | Tigris",
+                        Rarity = "Purple",
+                        ImagePath = "Images/CZ75-Auto_Tigris.png",
+                        Price = 12
+                    },
+                    new Skin
+                    {
+                        Name = "Glock-18 | Water Elemental",
+                        Rarity = "Pink",
+                        ImagePath = "Images/Glock-18_WaterElemental.png",
+                        Price = 30
+                    },
+                    new Skin
+                    {
+                        Name = "P90 | Asiimov",
+                        Rarity = "Red",
+                        ImagePath = "Images/P90_Asiimov.png",
+                        Price = 70
+                    },
+                    new Skin
+                    {
+                        Name = "Butterfly Knife | Slaughter",
+                        Rarity = "Gold",
+                        ImagePath = "Images/ButterflyKnife_Slaughter.png",
+                        Price = 150
+                    }
+                }
+            },
+            new Case
+            {
+                Name = "AWP Case",
+                ImagePath = "Images/AWPCase.png",
+                Skins = new List<Skin>()
+                {
+                    new Skin
+                    {
+                        Name = "AWP | Desert Hydra",
+                        Rarity = "Red",
+                        ImagePath = "Images/AWP_DesertHydra.png",
+                        Price = 5
+                    },
+                    new Skin
+                    {
+                        Name = "AWP | Dragon Lore",
+                        Rarity = "Red",
+                        ImagePath = "Images/AWP_DragonLore.png",
+                        Price = 12
+                    },
+                    new Skin
+                    {
+                        Name = "AWP | Fade",
+                        Rarity = "Red",
+                        ImagePath = "Images/AWP_Fade.png",
+                        Price = 30
+                    },
+                    new Skin
+                    {
+                        Name = "AWP | Gungnir",
+                        Rarity = "Red",
+                        ImagePath = "Images/AWP_Gungnir.png",
+                        Price = 80
+                    },
+                    new Skin
+                    {
+                        Name = "AWP | Medusa",
+                        Rarity = "Red",
+                        ImagePath = "Images/AWP_Medusa.png",
+                        Price = 200
+                    },
+                    new Skin
+                    {
+                        Name = "AWP | The Prince",
+                        Rarity = "Red",
+                        ImagePath = "Images/AWP_ThePrince.png",
+                        Price = 150
+                    }
+                }
+            },
+          new Case
+            {
+                Name = "Knife Case",
+                ImagePath = "Images/KNIFECase.png",
+                Skins = new List<Skin>()
+                {
+                    new Skin
+                    {
+                        Name = "Butterfly Knife | Gamma Doppler",
+                        Rarity = "Gold",
+                        ImagePath = "Images/ButterflyKnife_GammaDoppler.png",
+                        Price = 5
+                    },
+                    new Skin
+                    {
+                        Name = "M9 Bayonet | Autotronic",
+                        Rarity = "Gold",
+                        ImagePath = "Images/M9Bayonet_Autotronic.png",
+                        Price = 12
+                    },
+                    new Skin
+                    {
+                        Name = "Huntsman Knife | Rust Coat",
+                        Rarity = "Gold",
+                        ImagePath = "Images/HuntsmanKnife_RustCoat.png",
+                        Price = 30
+                    },
+                    new Skin
+                    {
+                        Name = "Karambit | Doppler",
+                        Rarity = "Pink",
+                        ImagePath = "Images/Karambit_Doppler.png",
+                        Price = 30
+                    },
+                    new Skin
+                    {
+                        Name = "Navaja Knife | Vanilla",
+                        Rarity = "Gold",
+                        ImagePath = "Images/NavajaKnife_Vanilla.png",
+                        Price = 30
+                    },
+                    new Skin
+                    {
+                        Name = "Stiletto Knife | Marble Fade",
+                        Rarity = "Gold",
+                        ImagePath = "Images/StillettoKnife_MarbleFade.png",
+                        Price = 30
+                    },
+                    new Skin
+                    {
+                        Name = "Survival Knife | Fade",
+                        Rarity = "Gold",
+                        ImagePath = "Images/SurvivalKnife_Fade.png",
+                        Price = 30
+                    },
+                    new Skin
+                    {
+                        Name = "Shadow Daggers | Šusťove kolíky",
+                        Rarity = "Gold",
+                        ImagePath = "Images/ShadowDaggers_BrightWater.png",
+                        Price = 30
+                    },
                 }
             }
         };

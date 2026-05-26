@@ -6,6 +6,7 @@ namespace CS2_CaseOpening
 {
     public partial class MainWindow : Window
     {
+        // kept for compatibility with older logic; real storage is in AccountsManager
         private Dictionary<string, string> users = new Dictionary<string, string>()
         {
             { "admin", "cs2best" }
@@ -14,6 +15,17 @@ namespace CS2_CaseOpening
         public MainWindow()
         {
             InitializeComponent();
+
+            // Load persisted accounts
+            AccountsManager.LoadAccounts();
+
+            // Ensure at least default admin exists (optional)
+            if (!AccountsManager.TryGetAccount("admin", out var _))
+            {
+                var admin = new Account { Username = "admin", Password = "cs2best", Balance = 100.0 };
+                AccountsManager.AddAccount(admin);
+            }
+
             txtUsername.Focus();
         }
 
@@ -28,15 +40,31 @@ namespace CS2_CaseOpening
                 return;
             }
 
-            if (users.ContainsKey(user))
+            // create new account with default starting balance and empty inventory
+            var account = new Account
+            {
+                Username = user,
+                Password = pass,
+                Balance = 100.0,
+                MySkins = new System.Collections.Generic.List<Skin>()
+            };
+
+            if (!AccountsManager.AddAccount(account))
             {
                 lblError.Text = "Tento používateľ už existuje!";
             }
             else
             {
-                users.Add(user, pass);
                 lblError.Text = "";
                 MessageBox.Show("Registrácia úspešná!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // Automatically log in the new user and populate GameData
+                AccountsManager.Login(user, pass);
+
+                // Clear inputs so user can immediately use the login fields (or proceed)
+                txtUsername.Clear();
+                txtPassword.Clear();
+                txtUsername.Focus();
             }
         }
 
@@ -50,15 +78,11 @@ namespace CS2_CaseOpening
             string user = txtUsername.Text.Trim();
             string pass = txtPassword.Password;
 
-            if (users.TryGetValue(user, out string storedPass) && storedPass == pass)
+            if (AccountsManager.Login(user, pass))
             {
-                // 1. Vytvoríme MENU, nie inventár
+                // GameData is now synced from account
                 MenuWindow menuWin = new MenuWindow();
-
-                // 2. Zobrazíme menu
                 menuWin.Show();
-
-                // 3. Zatvoríme prihlasovacie okno
                 this.Close();
             }
             else
@@ -66,6 +90,7 @@ namespace CS2_CaseOpening
                 lblError.Text = "Nesprávne meno alebo heslo!";
             }
         }
+
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter) HandleLogin();

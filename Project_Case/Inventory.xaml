@@ -38,7 +38,7 @@
 
             <!-- BALANCE -->
             <TextBlock x:Name="txtBalance"
-                       Text="Balance: $0"
+                       Text="Balance: 0€"
                        Foreground="Gold"
                        FontSize="18"
                        VerticalAlignment="Center"

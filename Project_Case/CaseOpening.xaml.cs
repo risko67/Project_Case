@@ -62,7 +62,15 @@ namespace CS2_CaseOpening
 
         private Skin GetRandomSkinByRarity(string rarity)
         {
-            var skins = currentCase.Skins.FindAll(s => s.Rarity == rarity);
+            var skins = currentCase.Skins.FindAll(
+                s => s.Rarity.Equals(rarity, StringComparison.OrdinalIgnoreCase)
+            );
+
+            // AK DANÁ RARITA NEEXISTUJE -> vyber random skin z case
+            if (skins.Count == 0)
+            {
+                skins = currentCase.Skins;
+            }
 
             var baseSkin = skins[rnd.Next(skins.Count)];
 
@@ -75,11 +83,12 @@ namespace CS2_CaseOpening
                 Price = baseSkin.Price
             };
 
-            // assign float and wear
             GenerateFloat(newSkin);
 
-            // compute price based on rarity and float
-            newSkin.Price = ComputePriceByRarityAndFloat(newSkin.Rarity, newSkin.Float);
+            newSkin.Price = ComputePriceByRarityAndFloat(
+                newSkin.Rarity,
+                newSkin.Float
+            );
 
             return newSkin;
         }
@@ -102,7 +111,7 @@ namespace CS2_CaseOpening
 
             double price = range.min + t * (range.max - range.min);
 
-            // Round to nearest integer dollar
+            // Round to nearest integer
             return (int)Math.Round(price);
         }
 
@@ -184,12 +193,15 @@ namespace CS2_CaseOpening
 
             if (GameData.Balance < caseCost)
             {
-                MessageBox.Show("Nedostatok prostriedkov. Potrebujete $2.50.", "Nedostatok", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show($"Nedostatok prostriedkov. Potrebujete {GameData.CurrencySymbol}{caseCost:0.00}.", "Nedostatok", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             // Deduct cost
             GameData.Balance -= caseCost;
+
+            // persist change immediately for autosave
+            AccountsManager.SaveCurrentAccount();
 
             btnSpin.IsEnabled = false;
 
@@ -216,6 +228,9 @@ namespace CS2_CaseOpening
             anim.Completed += (s, ev) =>
             {
                 GameData.MySkins.Add(winningSkin);
+
+                // persist inventory change
+                AccountsManager.SaveCurrentAccount();
 
                 MessageBox.Show(
                     $"Vyhral si:\n{winningSkin.Name}\n{winningSkin.Wear}"

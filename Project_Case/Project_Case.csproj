@@ -13,11 +13,21 @@
   <ItemGroup>
     <None Remove="Images\AK-47_Asiimov.png" />
     <None Remove="Images\AK47_Skin5.png" />
+    <None Remove="Images\AWPCase.png" />
+    <None Remove="Images\AWP_DesertHydra.png" />
     <None Remove="Images\AWP_DragonLore.png" />
+    <None Remove="Images\AWP_Fade.png" />
+    <None Remove="Images\AWP_Gungnir.png" />
+    <None Remove="Images\AWP_Medusa.png" />
     <None Remove="Images\AWP_Phobos.png" />
     <None Remove="Images\AWP_Printstream.png" />
+    <None Remove="Images\AWP_ThePrince.png" />
+    <None Remove="Images\BreakoutCase.png" />
     <None Remove="Images\ButterflyKnife_Autotronic.png" />
+    <None Remove="Images\ButterflyKnife_GammaDoppler.png" />
+    <None Remove="Images\ButterflyKnife_Slaughter.png" />
     <None Remove="Images\case.png" />
+    <None Remove="Images\CZ75-Auto_Tigris.png" />
     <None Remove="Images\DangerZoneCase.png" />
     <None Remove="Images\DesertEagle_Skin4.png" />
     <None Remove="Images\Dreams&amp;NightmaresCase.png" />
@@ -26,17 +36,28 @@
     <None Remove="Images\Five-SeveN_Scrawl.png" />
     <None Remove="Images\GalilAR_Control.png" />
     <None Remove="Images\GammaCase.png" />
+    <None Remove="Images\Glock-18_WaterElemental.png" />
     <None Remove="Images\Glock18_Shinobu.png" />
     <None Remove="Images\Glock18_Skin1.png" />
+    <None Remove="Images\HuntsmanKnife_RustCoat.png" />
+    <None Remove="Images\Karambit_Doppler.png" />
     <None Remove="Images\Karambit_GammaDoppler.png" />
+    <None Remove="Images\KNIFECase.png" />
     <None Remove="Images\M4A1-S_MechaIndustries.png" />
     <None Remove="Images\M4A4_Choppa.png" />
+    <None Remove="Images\M9Bayonet_Autotronic.png" />
     <None Remove="Images\MAC-10_Carnivore.png" />
+    <None Remove="Images\MP7_UrbanHazard.png" />
     <None Remove="Images\MP9_StarlightProtector.png" />
+    <None Remove="Images\NavajaKnife_Vanilla.png" />
     <None Remove="Images\P2000_ImperialDragon.png" />
     <None Remove="Images\P250_Nevermore.png" />
+    <None Remove="Images\P90_Asiimov.png" />
     <None Remove="Images\P90_Skin3.png" />
+    <None Remove="Images\ShadowDaggers_BrightWater.png" />
     <None Remove="Images\SkeletonKnife_Doppler.png" />
+    <None Remove="Images\StillettoKnife_MarbleFade.png" />
+    <None Remove="Images\SurvivalKnife_Fade.png" />
     <None Remove="Images\TalonKnife_Fade.png" />
     <None Remove="Images\Tec-9_Fubar.png" />
     <None Remove="Images\UMP-45_Momentum.png" />
@@ -48,13 +69,43 @@
     <Content Include="Images\AK-47_Asiimov.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\AWPCase.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AWP_DesertHydra.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AWP_DragonLore.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AWP_Gungnir.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AWP_Medusa.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\AWP_Phobos.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\AWP_Printstream.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\AWP_ThePrince.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\BreakoutCase.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\ButterflyKnife_Autotronic.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ButterflyKnife_GammaDoppler.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ButterflyKnife_Slaughter.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\CZ75-Auto_Tigris.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\DangerZoneCase.png">
@@ -78,10 +129,22 @@
     <Content Include="Images\GammaCase.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Glock-18_WaterElemental.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Glock18_Shinobu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\HuntsmanKnife_RustCoat.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Karambit_Doppler.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Karambit_GammaDoppler.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\KNIFECase.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\M4A1-S_MechaIndustries.png">
@@ -90,10 +153,19 @@
     <Content Include="Images\M4A4_Choppa.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\M9Bayonet_Autotronic.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\MAC-10_Carnivore.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\MP7_UrbanHazard.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\MP9_StarlightProtector.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\NavajaKnife_Vanilla.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\P2000_ImperialDragon.png">
@@ -102,7 +174,19 @@
     <Content Include="Images\P250_Nevermore.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\P90_Asiimov.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ShadowDaggers_BrightWater.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\SkeletonKnife_Doppler.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\StillettoKnife_MarbleFade.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SurvivalKnife_Fade.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\TalonKnife_Fade.png">
@@ -115,6 +199,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\USP-S_TickettoHell.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\AWP_Fade.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

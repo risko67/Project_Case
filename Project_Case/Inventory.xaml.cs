@@ -44,7 +44,7 @@ namespace CS2_CaseOpening
 
         private void UpdateBalanceText()
         {
-            txtBalance.Text = $"Balance: ${GameData.Balance:F2}";
+            txtBalance.Text = $"Balance: {GameData.Balance:F2}€";
         }
 
         private Brush GetRarityColor(string rarity)
