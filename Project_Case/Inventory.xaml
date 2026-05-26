@@ -50,8 +50,25 @@
         <!-- INVENTORY -->
         <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-            <UniformGrid x:Name="InventoryGrid"
-                         Columns="6"/>
+            <StackPanel>
+                <!-- Regular cases / items -->
+                <UniformGrid x:Name="RegularGrid"
+                             Columns="6"/>
+
+                <!-- Visual separator / label for special cases -->
+                <TextBlock x:Name="txtSpecialLabel"
+                           Text="SPECIAL CASES"
+                           Foreground="#FFD700"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Margin="0,12,0,6"
+                           Visibility="Collapsed"/>
+
+                <!-- Special cases shown separately -->
+                <UniformGrid x:Name="SpecialGrid"
+                             Columns="6"
+                             Visibility="Collapsed"/>
+            </StackPanel>
 
         </ScrollViewer>
 

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Xml.Linq;
-using CS2_CaseOpening;
 
 namespace CS2_CaseOpening
 {
@@ -24,14 +23,30 @@ namespace CS2_CaseOpening
 
             txtSkinName.Text = _skin.Name;
             txtRarity.Text = _skin.Rarity;
+            txtRarity.Foreground = GetRarityBrush(_skin.Rarity);
+
+            // show float (4 decimal places)
+            txtFloat.Text = $"Float: {_skin.Float:F4}";
 
             if (!string.IsNullOrEmpty(_skin.ImagePath))
             {
                 imgSkin.Source = new BitmapImage(new Uri(_skin.ImagePath, UriKind.RelativeOrAbsolute));
             }
 
-            var priceValue = Convert.ToDouble(_skin.Price);
-            txtPrice.Text = $"Cena: {priceValue:F2} €";
+            txtPrice.Text = $"Cena: {_skin.Price:F2} €";
+        }
+
+        private Brush GetRarityBrush(string rarity)
+        {
+            return rarity switch
+            {
+                "Blue" => Brushes.DeepSkyBlue,
+                "Purple" => Brushes.MediumPurple,
+                "Pink" => Brushes.DeepPink,
+                "Red" => Brushes.OrangeRed,
+                "Gold" => Brushes.Gold,
+                _ => Brushes.White
+            };
         }
 
         private void btnSell_Click(object sender, RoutedEventArgs e)
@@ -41,7 +56,7 @@ namespace CS2_CaseOpening
             var item = GameData.MySkins.Find(x => x.Id == _skin.Id);
             if (item == null) return;
 
-            GameData.Balance += Convert.ToDouble(item.Price);
+            GameData.Balance += item.Price;
             GameData.MySkins.Remove(item);
 
             MessageBox.Show($"Predali ste: {item.Name}", "Info", MessageBoxButton.OK, MessageBoxImage.Information);

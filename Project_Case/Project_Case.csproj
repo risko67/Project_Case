@@ -22,6 +22,7 @@
     <None Remove="Images\AWP_Phobos.png" />
     <None Remove="Images\AWP_Printstream.png" />
     <None Remove="Images\AWP_ThePrince.png" />
+    <None Remove="Images\BloodhoundGloves_Charred.png" />
     <None Remove="Images\BreakoutCase.png" />
     <None Remove="Images\ButterflyKnife_Autotronic.png" />
     <None Remove="Images\ButterflyKnife_GammaDoppler.png" />
@@ -31,6 +32,7 @@
     <None Remove="Images\DangerZoneCase.png" />
     <None Remove="Images\DesertEagle_Skin4.png" />
     <None Remove="Images\Dreams&amp;NightmaresCase.png" />
+    <None Remove="Images\DriverGloves_RacingGreen.png" />
     <None Remove="Images\FAMAS_RapidEyeMovement.png" />
     <None Remove="Images\FeverCase.png" />
     <None Remove="Images\Five-SeveN_Scrawl.png" />
@@ -39,6 +41,7 @@
     <None Remove="Images\Glock-18_WaterElemental.png" />
     <None Remove="Images\Glock18_Shinobu.png" />
     <None Remove="Images\Glock18_Skin1.png" />
+    <None Remove="Images\GloveCase.png" />
     <None Remove="Images\HuntsmanKnife_RustCoat.png" />
     <None Remove="Images\Karambit_Doppler.png" />
     <None Remove="Images\Karambit_GammaDoppler.png" />
@@ -47,6 +50,7 @@
     <None Remove="Images\M4A4_Choppa.png" />
     <None Remove="Images\M9Bayonet_Autotronic.png" />
     <None Remove="Images\MAC-10_Carnivore.png" />
+    <None Remove="Images\MotoGloves_Polygon.png" />
     <None Remove="Images\MP7_UrbanHazard.png" />
     <None Remove="Images\MP9_StarlightProtector.png" />
     <None Remove="Images\NavajaKnife_Vanilla.png" />
@@ -56,6 +60,9 @@
     <None Remove="Images\P90_Skin3.png" />
     <None Remove="Images\ShadowDaggers_BrightWater.png" />
     <None Remove="Images\SkeletonKnife_Doppler.png" />
+    <None Remove="Images\SpecialistGloves_Foundation.png" />
+    <None Remove="Images\SportGloves_SnowLeopard.png" />
+    <None Remove="Images\SportGloves_Vice.png" />
     <None Remove="Images\StillettoKnife_MarbleFade.png" />
     <None Remove="Images\SurvivalKnife_Fade.png" />
     <None Remove="Images\TalonKnife_Fade.png" />
@@ -93,6 +100,9 @@
     <Content Include="Images\AWP_ThePrince.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\BloodhoundGloves_Charred.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\BreakoutCase.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -114,6 +124,9 @@
     <Content Include="Images\Dreams&amp;NightmaresCase.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\DriverGloves_RacingGreen.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\FAMAS_RapidEyeMovement.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -133,6 +146,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Glock18_Shinobu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\GloveCase.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\HuntsmanKnife_RustCoat.png">
@@ -159,6 +175,9 @@
     <Content Include="Images\MAC-10_Carnivore.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\MotoGloves_Polygon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\MP7_UrbanHazard.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -181,6 +200,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\SkeletonKnife_Doppler.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SpecialistGloves_Foundation.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SportGloves_SnowLeopard.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SportGloves_Vice.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\StillettoKnife_MarbleFade.png">

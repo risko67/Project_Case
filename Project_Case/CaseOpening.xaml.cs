@@ -29,6 +29,10 @@ namespace CS2_CaseOpening
         {
             InitializeComponent();
             currentCase = selectedCase;
+
+            // Update the button text to show the actual case price (fallback to 2.50)
+            double displayPrice = currentCase?.Price ?? 2.50;
+            btnSpin.Content = $"OPEN CASE ({GameData.CurrencySymbol}{displayPrice:0.00})";
         }
 
         private string RollRarity()
@@ -66,7 +70,7 @@ namespace CS2_CaseOpening
                 s => s.Rarity.Equals(rarity, StringComparison.OrdinalIgnoreCase)
             );
 
-            // AK DANÁ RARITA NEEXISTUJE -> vyber random skin z case
+            // If rarity doesn't exist -> pick random skin from case
             if (skins.Count == 0)
             {
                 skins = currentCase.Skins;
@@ -80,39 +84,43 @@ namespace CS2_CaseOpening
                 Name = baseSkin.Name,
                 Rarity = baseSkin.Rarity,
                 ImagePath = baseSkin.ImagePath,
-                Price = baseSkin.Price
+                Price = baseSkin.Price // seed with base initializer
             };
 
             GenerateFloat(newSkin);
 
-            newSkin.Price = ComputePriceByRarityAndFloat(
-                newSkin.Rarity,
-                newSkin.Float
-            );
+            // ALWAYS compute final price using base initializer + float + rarity
+            newSkin.Price = ComputePriceFromBaseAndFloat(baseSkin.Price, newSkin.Rarity, newSkin.Float);
 
             return newSkin;
         }
 
-        private int ComputePriceByRarityAndFloat(string rarity, double fl)
+        // new: compute final sell price from base initializer and float for ALL skins
+        private double ComputePriceFromBaseAndFloat(double basePrice, string rarity, double fl)
         {
-            // Price ranges per rarity (min, max)
-            (double min, double max) range = rarity switch
+            // small safeguards
+            if (basePrice < 0.01) basePrice = Math.Max(basePrice, 0.05);
+
+            // rarity influence on how strongly float affects price
+            double rarityBoost = rarity switch
             {
-                "Blue" => (1.0, 3.0),
-                "Purple" => (3.0, 7.0),
-                "Pink" => (7.0, 30.0),
-                "Red" => (30.0, 90.0),
-                "Gold" => (90.0, 400.0),
-                _ => (1.0, 3.0)
+                "Blue" => 0.6,
+                "Purple" => 0.85,
+                "Pink" => 1.0,
+                "Red" => 1.2,
+                "Gold" => 1.4,
+                _ => 1.0
             };
 
-            // lower float -> higher price, so invert float when interpolating
+            // lower float => higher price
             double t = Math.Clamp(1.0 - fl, 0.0, 1.0);
 
-            double price = range.min + t * (range.max - range.min);
+            // multiplier ranges from ~0.5 (poor float) up to higher depending on rarityBoost
+            double multiplier = 0.5 + t * (1.5 * rarityBoost);
 
-            // Round to nearest integer
-            return (int)Math.Round(price);
+            double price = Math.Round(Math.Max(0.05, basePrice * multiplier), 2);
+
+            return price;
         }
 
         private void PrepareCrate(Skin forcedWinner, int winningIndex)
@@ -188,8 +196,8 @@ namespace CS2_CaseOpening
 
         private void btnSpin_Click(object sender, RoutedEventArgs e)
         {
-            // cost to open a case
-            const double caseCost = 2.50;
+            // Use the current case price (fallback to 2.50)
+            double caseCost = currentCase?.Price ?? 2.50;
 
             if (GameData.Balance < caseCost)
             {
@@ -203,7 +211,9 @@ namespace CS2_CaseOpening
             // persist change immediately for autosave
             AccountsManager.SaveCurrentAccount();
 
+            // disable controls while animation runs
             btnSpin.IsEnabled = false;
+            btnBackToInventory.IsEnabled = false;
 
             string rarity = RollRarity();
 
@@ -245,6 +255,20 @@ namespace CS2_CaseOpening
                 TranslateTransform.XProperty,
                 anim
             );
+        }
+
+        private void btnBackToInventory_Click(object sender, RoutedEventArgs e)
+        {
+            // Prevent going back while a spin is running
+            if (!btnSpin.IsEnabled)
+            {
+                MessageBox.Show("Can't go back while the case is opening.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            // Return to cases list
+            new Inventory("Cases").Show();
+            this.Close();
         }
     }
 }

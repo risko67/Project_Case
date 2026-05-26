@@ -140,20 +140,47 @@ namespace CS2_CaseOpening
 
         public void LoadItems()
         {
-            InventoryGrid.Children.Clear();
+            // Clear both grids and hide special label/grid by default
+            RegularGrid.Children.Clear();
+            SpecialGrid.Children.Clear();
+            txtSpecialLabel.Visibility = Visibility.Collapsed;
+            SpecialGrid.Visibility = Visibility.Collapsed;
 
             if (_mode == "Cases")
             {
-                foreach (var c in GameData.Cases)
+                var specialNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    InventoryGrid.Children.Add(CreateSlot(c.ImagePath, "Gold", c.Name, c));
+                    "AWP Case",
+                    "Knife Case",
+                    "Glove Case"
+                };
+
+                var regularCases = GameData.Cases.Where(c => !specialNames.Contains(c.Name)).ToList();
+                var specialCases = GameData.Cases.Where(c => specialNames.Contains(c.Name)).ToList();
+
+                // Add normal cases first
+                foreach (var c in regularCases)
+                {
+                    RegularGrid.Children.Add(CreateSlot(c.ImagePath, "Gold", c.Name, c));
+                }
+
+                // If there are special cases, show the label and add them separately
+                if (specialCases.Any())
+                {
+                    txtSpecialLabel.Visibility = Visibility.Visible;
+                    SpecialGrid.Visibility = Visibility.Visible;
+
+                    foreach (var sc in specialCases)
+                    {
+                        SpecialGrid.Children.Add(CreateSlot(sc.ImagePath, "Gold", sc.Name, sc));
+                    }
                 }
             }
             else
             {
                 foreach (var skin in GameData.MySkins.ToList())
                 {
-                    InventoryGrid.Children.Add(CreateSlot(skin.ImagePath, skin.Rarity, skin.Name, skin));
+                    RegularGrid.Children.Add(CreateSlot(skin.ImagePath, skin.Rarity, skin.Name, skin));
                 }
             }
 
