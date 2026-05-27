@@ -16,11 +16,11 @@ namespace CS2_CaseOpening
 
         Dictionary<string, double> rarityChances = new Dictionary<string, double>()
         {
-            { "Blue", 50.0 },
-            { "Purple", 20.0 },
-            { "Pink", 15.0 },
-            { "Red", 10.0 },
-            { "Gold", 5.0 }
+            { "Blue", 30.0 },
+            { "Purple",25.0 },
+            { "Pink", 20.0 },
+            { "Red", 15.0 },
+            { "Gold", 10.0 }
         };
 
         private Case currentCase;
@@ -30,7 +30,6 @@ namespace CS2_CaseOpening
             InitializeComponent();
             currentCase = selectedCase;
 
-            // Update the button text to show the actual case price (fallback to 2.50)
             double displayPrice = currentCase?.Price ?? 2.50;
             btnSpin.Content = $"OPEN CASE ({GameData.CurrencySymbol}{displayPrice:0.00})";
         }
@@ -53,10 +52,10 @@ namespace CS2_CaseOpening
 
         private void GenerateFloat(Skin skin)
         {
-            // Generate a float between 0.0 and 1.0
+            
             skin.Float = Math.Round(rnd.NextDouble(), 4);
 
-            // Derive wear from float (lower float => better condition)
+            
             if (skin.Float <= 0.07) skin.Wear = "Factory New";
             else if (skin.Float <= 0.15) skin.Wear = "Minimal Wear";
             else if (skin.Float <= 0.38) skin.Wear = "Field-Tested";
@@ -70,7 +69,7 @@ namespace CS2_CaseOpening
                 s => s.Rarity.Equals(rarity, StringComparison.OrdinalIgnoreCase)
             );
 
-            // If rarity doesn't exist -> pick random skin from case
+            
             if (skins.Count == 0)
             {
                 skins = currentCase.Skins;
@@ -84,24 +83,24 @@ namespace CS2_CaseOpening
                 Name = baseSkin.Name,
                 Rarity = baseSkin.Rarity,
                 ImagePath = baseSkin.ImagePath,
-                Price = baseSkin.Price // seed with base initializer
+                Price = baseSkin.Price 
             };
 
             GenerateFloat(newSkin);
 
-            // ALWAYS compute final price using base initializer + float + rarity
+           
             newSkin.Price = ComputePriceFromBaseAndFloat(baseSkin.Price, newSkin.Rarity, newSkin.Float);
 
             return newSkin;
         }
 
-        // new: compute final sell price from base initializer and float for ALL skins
+        
         private double ComputePriceFromBaseAndFloat(double basePrice, string rarity, double fl)
         {
-            // small safeguards
+           
             if (basePrice < 0.01) basePrice = Math.Max(basePrice, 0.05);
 
-            // rarity influence on how strongly float affects price
+            
             double rarityBoost = rarity switch
             {
                 "Blue" => 0.6,
@@ -112,10 +111,10 @@ namespace CS2_CaseOpening
                 _ => 1.0
             };
 
-            // lower float => higher price
+            
             double t = Math.Clamp(1.0 - fl, 0.0, 1.0);
 
-            // multiplier ranges from ~0.5 (poor float) up to higher depending on rarityBoost
+           
             double multiplier = 0.5 + t * (1.5 * rarityBoost);
 
             double price = Math.Round(Math.Max(0.05, basePrice * multiplier), 2);
@@ -196,7 +195,7 @@ namespace CS2_CaseOpening
 
         private void btnSpin_Click(object sender, RoutedEventArgs e)
         {
-            // Use the current case price (fallback to 2.50)
+            
             double caseCost = currentCase?.Price ?? 2.50;
 
             if (GameData.Balance < caseCost)
@@ -205,13 +204,12 @@ namespace CS2_CaseOpening
                 return;
             }
 
-            // Deduct cost
             GameData.Balance -= caseCost;
 
-            // persist change immediately for autosave
+           
             AccountsManager.SaveCurrentAccount();
 
-            // disable controls while animation runs
+            
             btnSpin.IsEnabled = false;
             btnBackToInventory.IsEnabled = false;
 
@@ -239,7 +237,7 @@ namespace CS2_CaseOpening
             {
                 GameData.MySkins.Add(winningSkin);
 
-                // persist inventory change
+                
                 AccountsManager.SaveCurrentAccount();
 
                 MessageBox.Show(
@@ -259,14 +257,14 @@ namespace CS2_CaseOpening
 
         private void btnBackToInventory_Click(object sender, RoutedEventArgs e)
         {
-            // Prevent going back while a spin is running
+            
             if (!btnSpin.IsEnabled)
             {
                 MessageBox.Show("Can't go back while the case is opening.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
-            // Return to cases list
+            
             new Inventory("Cases").Show();
             this.Close();
         }

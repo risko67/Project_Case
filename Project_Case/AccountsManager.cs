@@ -64,7 +64,7 @@ namespace CS2_CaseOpening
             }
             catch
             {
-                // swallow IO errors for simplicity
+                
             }
         }
 
@@ -125,7 +125,7 @@ namespace CS2_CaseOpening
             SaveAccounts();
         }
 
-        // Convenience: save current account if set
+        
         public static void SaveCurrentAccount()
         {
             SyncAccountFromGameData();

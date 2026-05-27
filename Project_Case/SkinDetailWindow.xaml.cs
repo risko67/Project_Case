@@ -25,8 +25,19 @@ namespace CS2_CaseOpening
             txtRarity.Text = _skin.Rarity;
             txtRarity.Foreground = GetRarityBrush(_skin.Rarity);
 
-            // show float (4 decimal places)
-            txtFloat.Text = $"Float: {_skin.Float:F4}";
+            
+            if (_skin.Float > 0.0)
+            {
+                txtFloat.Text = $"Float: {_skin.Float:F4}";
+            }
+            else
+            {
+                txtFloat.Text = "Float: N/A";
+            }
+
+            
+            txtCondition.Text = string.IsNullOrWhiteSpace(_skin.Wear) ? "Condition: N/A" : $"Condition: {_skin.Wear}";
+            txtCondition.Foreground = GetRarityBrush(_skin.Rarity);
 
             if (!string.IsNullOrEmpty(_skin.ImagePath))
             {

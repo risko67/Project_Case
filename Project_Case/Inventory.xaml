@@ -9,7 +9,7 @@
 
     <DockPanel Margin="15">
 
-        <!-- TOP BAR -->
+      
         <Grid DockPanel.Dock="Top" Margin="0,0,0,15">
 
             <Grid.ColumnDefinitions>
@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <!-- BACK BUTTON -->
+           
             <Button Content="← SPÄŤ DO MENU"
                     Click="btnBack_Click"
                     HorizontalAlignment="Left"
@@ -27,7 +27,7 @@
                     BorderThickness="0"
                     Cursor="Hand"/>
 
-            <!-- TITLE -->
+           
             <TextBlock x:Name="txtTitle"
                        Text="INVENTÁR"
                        Foreground="White"
@@ -36,7 +36,7 @@
                        HorizontalAlignment="Center"
                        Grid.Column="1"/>
 
-            <!-- BALANCE -->
+           
             <TextBlock x:Name="txtBalance"
                        Text="Balance: 0€"
                        Foreground="Gold"
@@ -51,11 +51,11 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto">
 
             <StackPanel>
-                <!-- Regular cases / items -->
+               
                 <UniformGrid x:Name="RegularGrid"
                              Columns="6"/>
 
-                <!-- Visual separator / label for special cases -->
+                
                 <TextBlock x:Name="txtSpecialLabel"
                            Text="SPECIAL CASES"
                            Foreground="#FFD700"
@@ -64,7 +64,7 @@
                            Margin="0,12,0,6"
                            Visibility="Collapsed"/>
 
-                <!-- Special cases shown separately -->
+                
                 <UniformGrid x:Name="SpecialGrid"
                              Columns="6"
                              Visibility="Collapsed"/>

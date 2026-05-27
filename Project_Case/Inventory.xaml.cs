@@ -96,7 +96,7 @@ namespace CS2_CaseOpening
                 TextAlignment = TextAlignment.Center
             });
 
-            // SELL
+            
             slot.MouseRightButtonUp += (sender, e) =>
             {
                 if (data is Skin skin)
@@ -114,12 +114,12 @@ namespace CS2_CaseOpening
                 }
             };
 
-            // LEFT-CLICK: open case or skin detail
+            
             slot.MouseLeftButtonUp += (sender, e) =>
             {
                 if (data is Case c)
                 {
-                    // Open case opening window for this case
+                    
                     var win = new CaseOpening(c);
                     win.Show();
                     this.Close();
@@ -129,7 +129,7 @@ namespace CS2_CaseOpening
                     var detail = new SkinDetailWindow(s);
                     detail.Owner = this;
                     detail.ShowDialog();
-                    // Refresh inventory in case skin was sold
+                    
                     LoadItems();
                 }
             };
@@ -140,7 +140,7 @@ namespace CS2_CaseOpening
 
         public void LoadItems()
         {
-            // Clear both grids and hide special label/grid by default
+             
             RegularGrid.Children.Clear();
             SpecialGrid.Children.Clear();
             txtSpecialLabel.Visibility = Visibility.Collapsed;
@@ -158,13 +158,12 @@ namespace CS2_CaseOpening
                 var regularCases = GameData.Cases.Where(c => !specialNames.Contains(c.Name)).ToList();
                 var specialCases = GameData.Cases.Where(c => specialNames.Contains(c.Name)).ToList();
 
-                // Add normal cases first
+                
                 foreach (var c in regularCases)
                 {
                     RegularGrid.Children.Add(CreateSlot(c.ImagePath, "Gold", c.Name, c));
                 }
 
-                // If there are special cases, show the label and add them separately
                 if (specialCases.Any())
                 {
                     txtSpecialLabel.Visibility = Visibility.Visible;

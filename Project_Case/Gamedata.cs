@@ -9,7 +9,7 @@ namespace CS2_CaseOpening
 
         public static string CurrencySymbol = "€";
 
-        // reset starting balance to 100
+        
         public static double Balance = 100.0;
         public static string BalanceFormatted => $"{CurrencySymbol}{Balance:0.00}";
 
@@ -147,7 +147,7 @@ namespace CS2_CaseOpening
                 }
             },
 
-            // SPECIAL CASES - raised explicit prices so these are not cheap at runtime
+            
             new Case
             {
                 Name = "AWP Case",
@@ -178,7 +178,7 @@ namespace CS2_CaseOpening
                     new Skin { Name = "Navaja Knife | Vanilla", Rarity = "Gold", ImagePath = "Images/NavajaKnife_Vanilla.png", Price = 150.00 },
                     new Skin { Name = "Stiletto Knife | Marble Fade", Rarity = "Gold", ImagePath = "Images/StillettoKnife_MarbleFade.png", Price = 750.00 },
                     new Skin { Name = "Survival Knife | Fade", Rarity = "Gold", ImagePath = "Images/SurvivalKnife_Fade.png", Price = 600.00 },
-                    new Skin { Name = "Shadow Daggers | Bright Water", Rarity = "Gold", ImagePath = "Images/ShadowDaggers_BrightWater.png", Price = 300.00 }
+                    new Skin { Name = "Shadow Daggers | Šustekové kolíky", Rarity = "Gold", ImagePath = "Images/ShadowDaggers_BrightWater.png", Price = 300.00 }
                 }
             },
 

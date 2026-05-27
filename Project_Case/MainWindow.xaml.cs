@@ -6,7 +6,7 @@ namespace CS2_CaseOpening
 {
     public partial class MainWindow : Window
     {
-        // kept for compatibility with older logic; real storage is in AccountsManager
+      
         private Dictionary<string, string> users = new Dictionary<string, string>()
         {
             { "admin", "cs2best" }
@@ -16,10 +16,9 @@ namespace CS2_CaseOpening
         {
             InitializeComponent();
 
-            // Load persisted accounts
+          
             AccountsManager.LoadAccounts();
 
-            // Ensure at least default admin exists (optional)
             if (!AccountsManager.TryGetAccount("admin", out var _))
             {
                 var admin = new Account { Username = "admin", Password = "cs2best", Balance = 100.0 };
@@ -40,7 +39,20 @@ namespace CS2_CaseOpening
                 return;
             }
 
-            // create new account with default starting balance and empty inventory
+           
+            if (user.Length < 4)
+            {
+                lblError.Text = "Meno musí mať aspoň 4 znaky!";
+                return;
+            }
+
+            if (pass.Length < 8)
+            {
+                lblError.Text = "Heslo musí mať aspoň 8 znakov!";
+                return;
+            }
+
+            
             var account = new Account
             {
                 Username = user,
@@ -58,10 +70,10 @@ namespace CS2_CaseOpening
                 lblError.Text = "";
                 MessageBox.Show("Registrácia úspešná!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                // Automatically log in the new user and populate GameData
+                
                 AccountsManager.Login(user, pass);
 
-                // Clear inputs so user can immediately use the login fields (or proceed)
+                
                 txtUsername.Clear();
                 txtPassword.Clear();
                 txtUsername.Focus();
@@ -78,9 +90,22 @@ namespace CS2_CaseOpening
             string user = txtUsername.Text.Trim();
             string pass = txtPassword.Password;
 
+           
+            if (string.IsNullOrWhiteSpace(user) || string.IsNullOrWhiteSpace(pass))
+            {
+                lblError.Text = "Meno a heslo nesmú byť prázdne!";
+                return;
+            }
+
+            if (user.Length < 4 || pass.Length < 8)
+            {
+                lblError.Text = "Meno musí mať aspoň 4 znaky a heslo aspoň 8 znakov!";
+                return;
+            }
+
             if (AccountsManager.Login(user, pass))
             {
-                // GameData is now synced from account
+                
                 MenuWindow menuWin = new MenuWindow();
                 menuWin.Show();
                 this.Close();

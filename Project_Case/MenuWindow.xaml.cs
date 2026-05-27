@@ -9,7 +9,7 @@ namespace CS2_CaseOpening
             InitializeComponent();
         }
 
-        // Tlačidlo "OTVÁRAŤ BEDNE" v Menu
+      
         private void btnGoToCases_Click(object sender, RoutedEventArgs e)
         {
             Inventory inv = new Inventory("Cases");
@@ -17,7 +17,7 @@ namespace CS2_CaseOpening
             this.Close();
         }
 
-        // Tlačidlo "MOJE SKINY" v Menu
+       
         private void btnGoToSkins_Click(object sender, RoutedEventArgs e)
         {
             Inventory inv = new Inventory("Skins");
@@ -25,7 +25,7 @@ namespace CS2_CaseOpening
             this.Close();
         }
 
-        // Tlačidlo "ODHLÁSIŤ SA"
+        
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             MainWindow login = new MainWindow();
